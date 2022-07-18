@@ -1,2 +1,2 @@
-class bar:
+class Bar:
     pass

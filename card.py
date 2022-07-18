@@ -1,3 +1,3 @@
-class card:
+class Card:
     
     pass

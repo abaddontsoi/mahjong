@@ -1,2 +1,2 @@
-class deck_dump:
+class DeckDump:
     pass

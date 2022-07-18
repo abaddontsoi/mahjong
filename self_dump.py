@@ -1,2 +1,2 @@
-class self_dump:
+class SelfDump:
     pass
