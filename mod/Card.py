@@ -1,7 +1,7 @@
 class Card:
     MAANZI = "MAANZI"
     TUNGZI = "TUNGZI"
-    ZOKZI = "SOKZI"
+    SOKZI = "SOKZI"
     DUNG = "DUNG"
     NAAM = "NAAM"
     SAAI = "SAAI"
@@ -10,6 +10,7 @@ class Card:
     FAAT = "FAAT"
     BAAK = "BAAK"
 
-    def __init__(self, type, point = 0) -> None:
+    def __init__(self, type, point = 0, cardid = 0):
         self.type = type
         self.point = point
+        self.cardID = cardid
