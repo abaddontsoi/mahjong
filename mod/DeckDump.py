@@ -12,3 +12,11 @@ class DeckDump:
         theCard.next = self.top
         self.top = theCard
         pass
+
+    def peak(self):
+        return self.top
+
+    def pop(self):
+        oldTop = self.top
+        self.top = self.top.next
+        return oldTop

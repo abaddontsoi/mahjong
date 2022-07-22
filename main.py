@@ -35,6 +35,11 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
     # deck dump collect
     theDeckDump.collect(currentPlayer.playCard(cardIndex))
 
+    # all player check "combination"
+    topDeck = theDeckDump.peak()
+    currentPlayer.check_combins(topDeck)
+
+
 
 
 for i in barList:
