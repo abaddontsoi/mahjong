@@ -27,18 +27,29 @@ for i in barList:
 controller.setGameStatus(Controller.RUNNING)
 
 while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_empty():
+    # current player draw a card
+    currentPlayer.drawCardFromDeck(theDeck)
+
     print('Your cards > ', end='')
     currentPlayer.displayCards()
-    print(f'Please play a card( 0 - {len(currentPlayer.cards)-1} ): ')
+
+
+
+    print(f'Please play a card(0 - {len(currentPlayer.cards)-1}): ')
     cardIndex = int(input())
     
     # deck dump collect
     theDeckDump.collect(currentPlayer.playCard(cardIndex))
 
-    # all player check "combination"
+    # all other player check "combination"
     topDeck = theDeckDump.peak()
-    currentPlayer.check_combins(topDeck)
+    otherBarList = [i for i in barList if i is not currentPlayer]
 
+    # display other players' cards
+    for other in otherBarList:
+        print('Others > ', end='')
+        other.displayCards()
+        other.check_combins(topDeck)
 
 
 

@@ -1,4 +1,5 @@
 from mod.Card import Card
+from mod.Deck import Deck
 
 
 class Bar:
@@ -12,10 +13,14 @@ class Bar:
             self.cards.append(theCard)
             pass
 
+    def drawCardFromDeck(self, deck: Deck):
+        drawn = deck.pop()
+        self.cards.append(drawn)
+        print(f'You have drawn a: {drawn}')
+
     def displayCards(self):
         self.sortCards()
         print(self.cards)
-        pass
 
     def sortCards(self):
         for i in range(len(self.cards)):
@@ -40,7 +45,6 @@ class Bar:
 
     def can_pong(self, theCard: Card):
         awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
-        print(awaitList)
         return len(awaitList) == 2
 
     def pong_list(self, theCard: Card):
@@ -52,7 +56,7 @@ class Bar:
         sameTypeList = self.same_type(theCard)
         lowerList = [ i for i in sameTypeList if i.point == theCard.point - 1]
         higherList = [ i for i in sameTypeList if i.point == theCard.point + 1]
-        return lowerList is not None and higherList is not None
+        return lowerList != [] and higherList != []
 
     def seong_list(self, theCard: Card):
         sameTypeList = self.same_type(theCard)
@@ -62,8 +66,7 @@ class Bar:
 
     def can_gong(self, theCard: Card):
         awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
-        print(awaitList)
-        return len(awaitList) >= 3
+        return len(awaitList) == 3
 
     def gong_list(self, theCard: Card):
         awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
@@ -73,10 +76,12 @@ class Bar:
     def check_combins(self, theCard = None):
         if theCard:
             if self.can_pong(theCard):
-                print(self.pong_list(theCard))
+                print(f'pong list: {self.pong_list(theCard)}')
+
             if self.can_seong(theCard):
-                print(self.seong_list(theCard))
+                print(f'seong list: {self.seong_list(theCard)}')
+            
             if self.can_gong(theCard):
-                print(self.gong_list(theCard))
+                print(f'gong list: {self.gong_list(theCard)}')
         else:
             pass

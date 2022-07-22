@@ -20,6 +20,8 @@ class Card:
 
         if self.point == 0 : 
             return f'{self.type}'
+            # return f'{self.cardID}'
         else:
             return f'{self.point}{self.type}'
+            # return f'{self.cardID}'
         # return f'{self.cardID}'
