@@ -1,4 +1,5 @@
 class Controller:
+    INITIATE = 'INITIATE'
     RUNNING = 'RUNNING'
     ENDED = 'ENDED'
 

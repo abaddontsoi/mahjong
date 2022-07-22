@@ -1,7 +1,7 @@
 class Card:
-    MAANZI = "MAANZI"
-    TUNGZI = "TUNGZI"
-    SOKZI = "SOKZI"
+    MAANZI = "MAAN"
+    TUNGZI = "TUNG"
+    SOKZI = "SOK"
     DUNG = "DUNG"
     NAAM = "NAAM"
     SAAI = "SAAI"
@@ -14,3 +14,7 @@ class Card:
         self.type = type
         self.point = point
         self.cardID = cardid
+
+    def __repr__(self) -> str:
+        return f'{self.point}{self.type}'
+        # return f'{self.cardID}'
