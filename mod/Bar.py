@@ -25,3 +25,9 @@ class Bar:
             pass
         pass
 
+    def playCard(self, cardIndex: int):
+        return self.cards.pop(cardIndex)
+
+
+    def is_empty(self):
+        return len(self.cards) == 0

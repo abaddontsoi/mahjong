@@ -10,11 +10,16 @@ class Card:
     FAAT = "FAAT"
     BAAK = "BAAK"
 
-    def __init__(self, type, point = 0, cardid = 0):
+    def __init__(self, type, point = 0, cardid = 0, next = None):
         self.type = type
         self.point = point
         self.cardID = cardid
+        self.next = next
 
     def __repr__(self) -> str:
-        return f'{self.point}{self.type}'
+
+        if self.point == 0 : 
+            return f'{self.type}'
+        else:
+            return f'{self.point}{self.type}'
         # return f'{self.cardID}'

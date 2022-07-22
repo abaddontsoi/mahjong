@@ -17,21 +17,30 @@ controller = Controller(barList)
 
 theDeck = Deck()
 
+currentPlayer = barList[1]
+theDeckDump = DeckDump()
 controller.setGameStatus(Controller.INITIATE)
+for i in barList:
+    for j in range(13):
+        i.collectCard(theDeck.pop())
 
-while(controller.getGameStatus() != Controller.ENDED):
+controller.setGameStatus(Controller.RUNNING)
+
+while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_empty():
+    print('Your cards > ', end='')
+    currentPlayer.displayCards()
+    print(f'Please play a card( 0 - {len(currentPlayer.cards)-1} ): ')
+    cardIndex = int(input())
     
-    if controller.getGameStatus() == Controller.INITIATE:
-        for i in barList:
-            for j in range(13):
-                i.collectCard(theDeck.pop())
-
-    for i in barList:
-        i.displayCards()
+    # deck dump collect
+    theDeckDump.collect(currentPlayer.playCard(cardIndex))
 
 
+
+for i in barList:
+    i.displayCards()
+
+controller.setGameStatus(Controller.ENDED)
+
+if theDeck.is_empty():
     controller.setGameStatus(Controller.ENDED)
-
-    if theDeck.is_empty():
-        controller.setGameStatus(Controller.ENDED)
-    
