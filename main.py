@@ -14,9 +14,9 @@ barList = [
     BotBar("p4"),
 ]
 
-controller = Controller(barList)
-
 theDeck = Deck()
+controller = Controller(barList, theDeck)
+
 
 currentPlayer = barList[0]
 theDeckDump = DeckDump()
@@ -31,14 +31,20 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
     # current player draw a card
     currentPlayer.drawCardFromDeck(theDeck)
 
-    print('Your cards > ', end='')
-    currentPlayer.displayCards()
-    print(f'Please play a card(0 - {len(currentPlayer.cards)-1}): ')
-    cardIndex = int(input())
-    
+    # set up a variable for played card
+    playedCard = None
 
+    if isinstance(currentPlayer, BotBar):
+        playedCard = currentPlayer.autoPlay()
+    else:
+        print('Your cards > ', end='')
+        currentPlayer.displayCards()
+        print(f'Please play a card(0 - {len(currentPlayer.cards)-1}): ')
+        cardIndex = int(input())
+        playedCard = currentPlayer.playCard(cardIndex)
+    
     # deck dump collect
-    theDeckDump.collect(currentPlayer.playCard(cardIndex))
+    theDeckDump.collect(playedCard)
 
     # all other player check "combination"
     topDeck = theDeckDump.peak()
@@ -46,8 +52,8 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
 
     # display other players' cards
     for other in otherBarList:
-        print('Others > ', end='')
-        other.displayCards()
+        # print('Others > ', end='')
+        # other.displayCards()
         other.check_combins(topDeck)
 
     # change to next player

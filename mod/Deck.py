@@ -55,9 +55,11 @@ class Deck:
             idcounter += 1
 
         for j in range(4):
-            shuffled_cards.append(Card(Card.BAAK, 0, idcounter))
+            shuffled_cards.append(Card(Card.BAAKBAAN, 0, idcounter))
             idcounter += 1
 
         random.shuffle(shuffled_cards)
-        
         return shuffled_cards
+
+    def showSize(self):
+        return len(self.deck)

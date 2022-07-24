@@ -8,7 +8,7 @@ class Card:
     BAK = "BAK"
     ZUNG = "ZUNG"
     FAAT = "FAAT"
-    BAAK = "BAAK"
+    BAAKBAAN = "BAAKBAAN"
 
     def __init__(self, type, point = 0, cardid = 0, next = None):
         self.type = type

@@ -1,4 +1,5 @@
 from mod.Bar import Bar
+from mod.Deck import Deck
 
 
 class Controller:
@@ -6,7 +7,8 @@ class Controller:
     RUNNING = 'RUNNING'
     ENDED = 'ENDED'
 
-    def __init__(self, bars: list) -> None:
+    def __init__(self, bars: list, deck: Deck) -> None:
+        self.deck = deck
         self.players = bars
         self.gameStat = self.RUNNING
 
@@ -14,7 +16,9 @@ class Controller:
         self.gameStat = stat
 
     def getGameStatus(self):
-        print(f'The game is now {self.gameStat}')
+        print(
+            f'The game is now {self.gameStat}, {self.deck.showSize()} cards left'
+            )
         return self.gameStat
 
     def nextPlayer(self, currentPlayer: Bar):
