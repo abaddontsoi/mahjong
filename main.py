@@ -54,7 +54,14 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
     for other in otherBarList:
         # print('Others > ', end='')
         # other.displayCards()
-        other.check_combins(topDeck)
+        if other.check_combins(topDeck):
+            # interrupt sequence for "pong, seong, gong"
+            # First, change the current player to 'other'
+            # Second, collect the playedd card
+            # Third, choose the set of combination that is going to selfDump.
+            # Fourth, place the set to self dump
+            # Fifth, call the controller to move to next player
+            pass
 
     # change to next player
     currentPlayer = barList[controller.nextPlayer(currentPlayer)]

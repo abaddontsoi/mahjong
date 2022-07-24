@@ -3,6 +3,9 @@ from mod.Deck import Deck
 
 
 class Bar:
+    PONG = 'PONG'
+    SEONG = 'SEONG'
+    GONG = 'GONG'
 
     def __init__(self, name = "" ):
         self.name = name
@@ -85,5 +88,10 @@ class Bar:
             
             if self.can_gong(theCard):
                 print(f'gong list: {self.gong_list(theCard)}')
+            
+            return True
+
+            # may create some "set combinations" using class
+            # as the return value, driver code may also be changed
         else:
-            pass
+            return False
