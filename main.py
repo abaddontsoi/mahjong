@@ -5,19 +5,20 @@ from mod.Controller import Controller
 from mod.Deck import Deck
 from mod.DeckDump import DeckDump
 from mod.SelfDump import SelfDump
+from mod.botBar import BotBar
 
 barList = [
     Bar("p1"),
-    Bar("p2"),
-    Bar("p3"),
-    Bar("p4"),
+    BotBar("p2"),
+    BotBar("p3"),
+    BotBar("p4"),
 ]
 
 controller = Controller(barList)
 
 theDeck = Deck()
 
-currentPlayer = barList[1]
+currentPlayer = barList[0]
 theDeckDump = DeckDump()
 controller.setGameStatus(Controller.INITIATE)
 for i in barList:
@@ -32,12 +33,10 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
 
     print('Your cards > ', end='')
     currentPlayer.displayCards()
-
-
-
     print(f'Please play a card(0 - {len(currentPlayer.cards)-1}): ')
     cardIndex = int(input())
     
+
     # deck dump collect
     theDeckDump.collect(currentPlayer.playCard(cardIndex))
 
@@ -50,6 +49,9 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
         print('Others > ', end='')
         other.displayCards()
         other.check_combins(topDeck)
+
+    # change to next player
+    currentPlayer = barList[controller.nextPlayer(currentPlayer)]
 
 
 

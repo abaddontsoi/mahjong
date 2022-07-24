@@ -31,6 +31,8 @@ class Bar:
         pass
 
     def playCard(self, cardIndex: int):
+        self.sortCards()
+        print(f'{self.name} played a {self.cards[cardIndex]}')
         return self.cards.pop(cardIndex)
 
 
