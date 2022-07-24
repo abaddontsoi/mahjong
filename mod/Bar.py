@@ -16,6 +16,11 @@ class Bar:
             self.cards.append(theCard)
             pass
 
+    def createSet(self, theCard: Card, choice: int):
+        setList = [self.pong_list(theCard)] + [self.seong_list(theCard)] + [self.seong_list(theCard)]
+        pass
+
+
     def drawCardFromDeck(self, deck: Deck):
         drawn = deck.pop()
         self.cards.append(drawn)
@@ -49,14 +54,15 @@ class Bar:
             return []
 
     def can_pong(self, theCard: Card):
-        awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
-        return len(awaitList) == 2
+        awaitList = self.pong_list(theCard)
+        return len(awaitList) == 3
 
     def pong_list(self, theCard: Card):
         awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
         awaitList.append(theCard)
         return awaitList
 
+    # find the set that can form a sequence of card including 'theCard'
     def can_seong(self, theCard: Card):
         sameTypeList = self.same_type(theCard)
         lowerList = [ i for i in sameTypeList if i.point == theCard.point - 1]
@@ -70,8 +76,8 @@ class Bar:
         return lowerList + higherList
 
     def can_gong(self, theCard: Card):
-        awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
-        return len(awaitList) == 3
+        awaitList = self.gong_list(theCard)
+        return len(awaitList) == 4
 
     def gong_list(self, theCard: Card):
         awaitList = [i for i in self.same_type(theCard) if i.point == theCard.point]
@@ -87,10 +93,9 @@ class Bar:
                 print(f'seong list: {self.seong_list(theCard)}')
             
             if self.can_gong(theCard):
-                print(f'gong list: {self.gong_list(theCard)}')
-            
-            return True
+                print(f'gong list: {self.gong_list(theCard)}')        
 
+            return self.can_pong(theCard) or self.can_seong(theCard) or self.can_gong(theCard)
             # may create some "set combinations" using class
             # as the return value, driver code may also be changed
         else:
