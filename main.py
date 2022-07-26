@@ -1,6 +1,7 @@
 from mod.Bar import Bar
 from mod.Card import Card
 from mod.CombSet import CombSet
+from mod.CombinChecker import CombinChecker
 from mod.Controller import Controller
 from mod.Deck import Deck
 from mod.DeckDump import DeckDump
@@ -21,6 +22,7 @@ controller = Controller(barList, theDeck)
 currentPlayer = barList[0]
 theDeckDump = DeckDump()
 controller.setGameStatus(Controller.INITIATE)
+checker = CombinChecker()
 for i in barList:
     for j in range(13):
         i.collectCard(theDeck.pop())
@@ -55,29 +57,19 @@ while controller.getGameStatus() != Controller.ENDED and not currentPlayer.is_em
         # print('Others > ', end='')
         # other.displayCards()
         if other.check_combins(topDeck):
-            # interrupt sequence for "pong, seong, gong"
-            # First, change the current player to 'other'
-            currentPlayer = other
-            # Second, collect the playedd card
-            currentPlayer.collectCard(topDeck)
+            # interrupt sequence for "pong, seong, gong, wu"
+
+            # Collect the playedd card
             # Create the set first
-            # Third, choose the set of combination that is going to selfDump.
+            # Choose the set of combination that is going to selfDump.
             
             # Fourth, place the set to self dump
             
             # Fifth, call the controller to move to next player
             print('Before break')
             break
+    if theDeck.is_empty():
+        controller.setGameStatus(Controller.ENDED)
 
     # change to next player
     currentPlayer = barList[controller.nextPlayer(currentPlayer)]
-
-
-
-for i in barList:
-    i.displayCards()
-
-controller.setGameStatus(Controller.ENDED)
-
-if theDeck.is_empty():
-    controller.setGameStatus(Controller.ENDED)

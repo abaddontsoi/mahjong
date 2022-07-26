@@ -48,7 +48,7 @@ class Bar:
         return len(self.cards) == 0
 
     def same_type(self, theCard: Card):
-        if theCard:
+        if theCard: 
             return [ i for i in self.cards if i.type == theCard.type]
         else:
             return []
